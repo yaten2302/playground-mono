@@ -33,7 +33,7 @@ func TestCliHandler(t *testing.T) {
 	assert.JSONEq(t, expectedBody, w.Body.String())
 
 	// Test case: invalid command
-	reqBody = `{"command": "invalid", "params": {}}`
+	reqBody = `{"Cmd": "invalid", "Args": {}}`
 	req, err = http.NewRequest("POST", "/cli", strings.NewReader(reqBody))
 	assert.NoError(t, err)
 	req.Header.Set("Content-Type", "application/json")
@@ -46,7 +46,7 @@ func TestCliHandler(t *testing.T) {
 	assert.JSONEq(t, expectedBody, w.Body.String())
 
 	// Test case: malformed JSON
-	reqBody = `{"command": "roll", "params": {"sides": 6`
+	reqBody = `{"Cmd": "invalid", "Args": {"k1": 6`
 	req, err = http.NewRequest("POST", "/cli", strings.NewReader(reqBody))
 	assert.NoError(t, err)
 	req.Header.Set("Content-Type", "application/json")
